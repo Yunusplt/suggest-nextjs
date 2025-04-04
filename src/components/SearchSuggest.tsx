@@ -9,6 +9,12 @@ import {
   ListItemText,
   Box,
 } from "@mui/material";
+import {
+  styleCategoriesBox,
+  styleMainBox,
+  stylePaper,
+  styleProductsBox,
+} from "./style";
 
 type Product = {
   name: string;
@@ -47,22 +53,8 @@ export default function SearchSuggest() {
     setShowSuggestions(true);
   }, [query]);
 
-  console.log("products", products);
-
   return (
-    <Box
-      sx={{
-        position: "relative",
-        mx: "auto",
-        width: {
-          xs: "350px",
-          sm: "500px",
-          md: "800px",
-        },
-        height: "100%",
-        mt: "2rem",
-      }}
-    >
+    <Box sx={styleMainBox}>
       <TextField
         fullWidth
         label="Wonach suchen Sie?"
@@ -73,37 +65,8 @@ export default function SearchSuggest() {
       />
       {showSuggestions &&
         (productSuggestions.length > 0 || categorySuggestions.length > 0) && (
-          <Paper
-            sx={{
-              position: "relative",
-              width: "100%",
-              zIndex: 10,
-              overflowY: "auto",
-              mt: "8px",
-              pt: "8px",
-              display: "flex",
-              flexDirection: {
-                xs: "column",
-                md: "row",
-              },
-              padding: "0 16px",
-            }}
-          >
-            <Box
-              sx={{
-                width: {
-                  xs: "100%",
-                  md: "50%",
-                },
-                paddingRight: "8px",
-                overflowY: "auto",
-                pt: "8px",
-                borderRight: {
-                  xs: "none",
-                  md: "1px solid #ccc",
-                },
-              }}
-            >
+          <Paper sx={stylePaper}>
+            <Box sx={styleProductsBox}>
               <h4>PRODUKTE</h4>
               <List>
                 {productSuggestions.map((item, index) => (
@@ -127,17 +90,7 @@ export default function SearchSuggest() {
               </List>
             </Box>
 
-            <Box
-              sx={{
-                width: {
-                  xs: "100%",
-                  md: "50%",
-                },
-                paddingLeft: "8px",
-                overflowY: "auto",
-                pt: "8px",
-              }}
-            >
+            <Box sx={styleCategoriesBox}>
               <h4>KATEGORIEN</h4>
               <List>
                 {categorySuggestions.map((item, index) => (
